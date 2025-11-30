@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restablecer Contraseña</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#753232",        /* EL ROJO ORIGINAL QUE PEDISTE */
+                        gold: "#BC945A",           /* Dorado */
+                        background: "#FFFFFF",
+                        "background-alt": "#F9FAFB",
+                        "text-primary": "#1F2937",
+                        "text-secondary": "#4B5563",
+                        "border-color": "#D1D5DB",
+                    },
+                    fontFamily: {
+                        display: ["Lexend", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Estilos CSS Base */
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+
+        /* --- Estilos del Spinner de Carga --- */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Estado del botón cargando */
+        .btn-loading {
+            opacity: 0.8;
+            cursor: not-allowed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Contenedor relativo para el input y el ojo */
+        .password-wrapper {
+            position: relative;
+        }
+        
+        /* Botón del ojo posicionado absolutamente */
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            /* AQUI CAMBIAMOS EL COLOR: Usará el rojo primario por defecto */
+            color: #753232; 
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+        
+        .toggle-password:hover {
+            opacity: 0.8; /* Efecto sutil al pasar el mouse */
+        }
+    </style>
+</head>
+
+<body class="bg-background-alt font-display text-text-primary">
+
+    <div class="flex min-h-screen items-center justify-center p-4">
+        <div class="w-full max-w-md">
+            
+            <div class="rounded-xl border border-border-color bg-background p-8 shadow-sm">
+                
+                <div class="mb-8 text-center">
+                    <h1 class="text-3xl font-bold tracking-tight text-gold">Restablecer Contraseña</h1>
+                    <p class="mt-2 text-base text-text-secondary">Crea una nueva contraseña segura para tu cuenta.</p>
+                </div>
+
+                <form id="resetForm" action="#" class="space-y-6" method="POST">
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary" for="new-password">Nueva Contraseña</label>
+                        <div class="mt-1 password-wrapper">
+                            <input 
+                                id="new-password" 
+                                name="new-password" 
+                                type="password" 
+                                required 
+                                autocomplete="new-password" 
+                                placeholder="Ingresa tu nueva contraseña" 
+                                class="block w-full rounded-md border-border-color bg-background-alt px-3 py-2 pr-10 text-text-primary placeholder:text-gray-400 focus:border-primary focus:ring-primary sm:text-sm"
+                            />
+                            <button type="button" class="toggle-password" data-target="new-password" title="Ver contraseña">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary" for="confirm-password">Confirmar Contraseña</label>
+                        <div class="mt-1 password-wrapper">
+                            <input 
+                                id="confirm-password" 
+                                name="confirm-password" 
+                                type="password" 
+                                required 
+                                autocomplete="new-password" 
+                                placeholder="Confirma tu nueva contraseña" 
+                                class="block w-full rounded-md border-border-color bg-background-alt px-3 py-2 pr-10 text-text-primary placeholder:text-gray-400 focus:border-primary focus:ring-primary sm:text-sm"
+                            />
+                            <button type="button" class="toggle-password" data-target="confirm-password" title="Ver contraseña">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                        </div>
+                        <p id="error-msg" class="hidden mt-2 text-sm text-red-600">Las contraseñas no coinciden.</p>
+                    </div>
+
+                    <div>
+                        <button id="submitBtn" class="flex w-full items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2" type="submit">
+                            <div id="loadingSpinner" class="spinner"></div>
+                            <span id="btnText">Actualizar Contraseña</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('resetForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const pass1 = document.getElementById('new-password');
+            const pass2 = document.getElementById('confirm-password');
+            const errorMsg = document.getElementById('error-msg');
+
+            // 1. Manejo del Historial (Flecha Atrás)
+            window.addEventListener('pageshow', () => {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('btn-loading');
+                btnText.textContent = "Actualizar Contraseña";
+                loadingSpinner.style.display = "none";
+            });
+
+            // 2. Manejo del Envío del Formulario
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validación simple de coincidencia
+                if (pass1.value !== pass2.value) {
+                    errorMsg.classList.remove('hidden');
+                    pass2.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                    return; 
+                } else {
+                    errorMsg.classList.add('hidden');
+                    pass2.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+                }
+
+                // Iniciar animación de carga
+                submitBtn.disabled = true;
+                submitBtn.classList.add('btn-loading');
+                btnText.textContent = "Actualizando...";
+                loadingSpinner.style.display = "block";
+
+                setTimeout(() => {
+                    form.submit();
+                }, 1500);
+            });
+
+            // 3. Manejo de Visibilidad de Contraseñas (Ojitos)
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    const icon = this.querySelector('span');
+
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.textContent = 'visibility_off'; // Icono de ocultar
+                    } else {
+                        input.type = 'password';
+                        icon.textContent = 'visibility'; // Icono de ver
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+        /* --- 1. Variables y Reset --- */
+        :root {
+            /* Colores extraídos de tu diseño */
+            --color-primary: #753232;        /* Vino/Marrón oscuro */
+            --color-primary-light: #fcf2f2;  /* Fondo suave para hover/activo */
+            --color-button-soft: #e3d5d5;    /* Fondo botón secundario */
+            --color-accent: #D4AF37;         /* Dorado/Mostaza */
+            --color-bg: #F9FAFB;             /* Fondo general gris muy claro */
+            --color-surface: #FFFFFF;        /* Tarjetas blancas */
+            --color-text-main: #121212;
+            --color-text-muted: #6c757d;
+            --border-color: #e5e7eb;
+            
+            /* Espaciado y Dimensiones */
+            --sidebar-width: 260px;
+            --radius-card: 16px;
+            --radius-btn: 8px;
+            --shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        input, button, select, textarea {
+    font-family: 'Lexend', sans-serif !important;
+}
+
+/* Opcional: Para asegurar que el "placeholder" (texto gris) también lo tenga */
+::placeholder {
+    font-family: 'Lexend', sans-serif !important;
+}
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden; /* Evitar doble scroll si es app de una sola página */
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        /* Utilidad para iconos */
+        .material-symbols-outlined {
+            vertical-align: middle;
+            font-size: 24px;
+        }
+
+        /* --- 2. Sidebar (Barra Lateral) --- */
+        aside.sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--color-surface);
+            border-right: 1px solid var(--border-color);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background-color: #f0e6d2; /* Color de ejemplo */
+            border-radius: 50%;
+            background-image: url('static/simg/flores.jpeg');
+            background-size: cover;
+        }
+
+        .brand-info h1 { font-size: 16px; font-weight: 700; }
+        .brand-info p { font-size: 13px; color: var(--color-text-muted); }
+
+        .nav-menu { display: flex; flex-direction: column; gap: 8px; }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-btn);
+            color: var(--color-text-muted);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: var(--color-primary-light);
+            color: var(--color-primary);
+        }
+
+        .nav-item.active {
+            background-color: #f5ebeb; /* Un tono rojizo muy suave */
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        /* Icono relleno para el activo */
+        .nav-item.active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        /* --- 3. Main Content (Contenido Principal) --- */
+        main.main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header.page-header { margin-bottom: 32px; }
+        header h2 { font-size: 32px; font-weight: 800; }
+
+        /* Grid Layout Principal */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr; /* Columna Izq fija, Derecha flexible */
+            gap: 32px;
+            max-width: 1200px;
+        }
+
+        /* --- 4. Componentes: Tarjetas --- */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px; /* Espacio si se apilan */
+        }
+
+        /* Columna Izquierda */
+        .left-column { display: flex; flex-direction: column; gap: 32px; }
+
+        /* Perfil Card */
+        .profile-card { text-align: center; }
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+        }
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #fcece0; /* Tono piel/beige fondo */
+        }
+        .edit-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-card h3 { font-size: 20px; margin-bottom: 4px; }
+        .profile-card .email { font-size: 14px; color: var(--color-text-muted); margin-bottom: 4px; }
+        .profile-card .member-since { font-size: 12px; color: var(--color-text-muted); margin-bottom: 24px; }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-btn);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        /* Progreso Circular */
+        .progress-card h3 { color: var(--color-accent); font-size: 18px; margin-bottom: 16px; font-weight: 700; }
+        .circular-chart-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+        }
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 100%;
+            transform: rotate(-90deg); /* Empezar desde arriba */
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke: var(--color-accent);
+            stroke-width: 3.8;
+            stroke-linecap: round;
+            /* Animación simple */
+            stroke-dasharray: 75, 100; /* 75% */
+        }
+        .percentage-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .percentage-text span.number { font-size: 32px; font-weight: 800; display: block; line-height: 1; }
+        .percentage-text span.label { font-size: 11px; color: var(--color-text-muted); }
+        .cheer-text { text-align: center; font-size: 13px; color: var(--color-text-muted); margin-top: 16px; }
+
+        /* Columna Derecha */
+        .right-column { display: flex; flex-direction: column; }
+        .main-panel { min-height: 500px; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 32px;
+        }
+        .tab-link {
+            padding-bottom: 16px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-link:hover { color: var(--color-text-main); }
+        .tab-link.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* Grid de Cursos */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .course-card {
+            background: var(--color-bg); /* O blanco con borde */
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-btn);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-image {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Imágenes de placeholder generadas con CSS gradient para simular la foto */
+        .img-algebra { background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); }
+        .img-calculo { background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60') center/cover; }
+
+        .course-content { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+        .course-content h4 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-bottom: 4px;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--color-primary);
+            border-radius: 10px;
+        }
+
+        .btn-soft {
+            margin-top: auto;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--color-button-soft);
+            color: var(--color-primary);
+            border: none;
+            border-radius: var(--radius-btn);
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-soft:hover { background-color: #d8c5c5; }
+
+        /* --- Responsive simple --- */
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .courses-grid { grid-template-columns: 1fr; }
+            aside.sidebar { display: none; } /* Ocultar sidebar en móvil por simplicidad */
+        }
+        
+.footer {
+    border-top: 1px solid #E5E7EB;
+    padding: 2.5rem 0 1.5rem 0;
+    text-align: center;
+    padding-right: 1.5rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.logo-footer h3 {
+    font-size: 1.125rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--color-primary);
+}
+
+.copyright {
+    font-size: 0.875rem;
+    color: #9CA3AF; 
+}

@@ -1,0 +1,612 @@
+
+:root {
+    /* Colores de claudia chamba (morena)*/
+    --color-primary:  #631534; 
+    --color-gold: #BC945A;   
+    --color-background: #FFFFFF;
+    --color-background-alt: #F9FAFB;
+    --color-text-primary: #1F2937;
+    --color-text-secondary: #4B5563;
+
+    /*La Tipografía */
+    --font-family-display: 'Lexend', sans-serif;
+    --max-width: 1280px;
+    --padding-x: 20px;
+}
+ /*no se ve el ojito en los password en casi todos los navegadores */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-textfield-decoration-container {
+    display: none !important;
+}
+input, button, select, textarea {
+    font-family: 'Lexend', sans-serif !important;
+}
+
+/* Opcional: Para asegurar que el "placeholder" (texto gris) también lo tenga */
+::placeholder {
+    font-family: 'Lexend', sans-serif !important;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-display);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    line-height: 1.6;
+}
+
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 0 var(--padding-x);
+}
+
+section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.section-description {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.highlight-color {
+    color: var(--color-primary);
+}
+
+.btn {
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-color: transparent;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(117, 50, 50, 0.05); 
+}
+
+.btn-large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+.material-symbols-outlined {
+    color: var(--color-primary);
+}
+
+
+.header {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.05em;
+}
+
+.logo-icon img {
+    width: 6rem;
+    height: 2rem;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #631534;
+}
+
+.hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.hero-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 0.75rem;
+    background-color: var(--color-primary); 
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%);
+    background-size: 10px 10px, 100% 100%, 100% 100%;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    width: 100%;
+    background: var(--color-background);
+    margin-bottom: 8rem;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 28rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+.logo-icon-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.logo-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+.login-card {
+    width: 100%;
+    background-color: var(--color-card, #fff);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.card-title {
+    color: var(--color-secondary, #BFA16A);
+    letter-spacing: -0.025em;
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+.card-subtitle {
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.label-text {
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    padding-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 100%;
+    min-width: 0;
+    flex-grow: 1;
+    border-radius: 0.5rem;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-color, #D1D5DB);
+    background-color: var(--input-bg, #f9fafb);
+    height: 3rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all 300ms ease;
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.toggle-password-button {
+    color: var(--color-text-secondary);
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    height: 100%;
+    width: 3rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.action-button-container {
+    display: flex;
+    padding: 1.5rem 0;
+}
+
+.action-button {
+    display: flex;
+    width: 100%;
+    min-width: 84px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    height: 3rem;
+    padding: 0 1.25rem;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    border: none;
+    transition: background-color 300ms, box-shadow 300ms;
+}
+
+.support-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.text-secondary {
+    color: var(--color-text-secondary);
+}
+
+.link-primary {
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.link-secondary {
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+}
+
+.features-section {
+    background-color: var(--color-background-alt);
+    margin-left: calc(-1 * var(--padding-x));
+    margin-right: calc(-1 * var(--padding-x));
+    padding-left: var(--padding-x);
+    padding-right: var(--padding-x);
+    text-align: left;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background-color: var(--color-background);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+}
+
+.feature-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+
+.testimonials-section {
+    text-align: left;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.testimonial-card {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #E5E7EB;
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.testimonial-header .name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.testimonial-header .title {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+.quote {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.cta-section {
+    background-color: var(--color-background-alt);
+    margin-left: calc(-1 * var(--padding-x)); 
+    margin-right: calc(-1 * var(--padding-x));
+    padding-left: var(--padding-x);
+    padding-right: var(--padding-x);
+    text-align: center;
+}
+
+.cta-box {
+    padding: 2.5rem;
+    background-color: var(--color-background);
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.cta-box .section-title {
+    margin-bottom: 0.5rem;
+}
+
+.footer {
+    border-top: 1px solid #E5E7EB;
+    padding: 2.5rem 0 1.5rem 0;
+    text-align: center;
+    padding-right: 1.5rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.logo-footer h3 {
+    font-size: 1.125rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--color-primary);
+}
+
+.copyright {
+    font-size: 0.875rem;
+    color: #9CA3AF; 
+}
+
+.custom-options {
+    display: none; /* Inicialmente oculto por JavaScript */
+    position: absolute;
+    top: 100%; /* Aparece justo debajo del input */
+    left: 0;
+    z-index: 20; /* Asegura que esté por encima de otros elementos */
+    width: 100%;
+    max-height: 200px; /* Limita la altura para scroll */
+    overflow-y: auto;
+    
+    /* Utilizando tus variables CSS */
+    background-color: var(--color-background); 
+    border: 1px solid var(--color-border-color, #D1D5DB);
+    
+    border-top: none; /* Quitamos el borde superior para que se una al input */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 0 0 0.5rem 0.5rem; /* Bordes redondeados solo en la parte inferior */
+}
+
+/* Estilo para cada opción */
+.option-item {
+    padding: 0.75rem 1rem; /* Padding similar a tu input */
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: background-color 0.2s;
+}
+
+/* Estilo al pasar el ratón (hover) */
+.option-item:hover {
+    background-color: var(--color-background-alt); /* Color de fondo alternativo */
+    color: var(--color-primary); /* Resalta el texto con tu color primario */
+}
+
+/* Clase para mostrar las opciones (controlada por JS) */
+.custom-options.show {
+    display: block;
+}
+
+/* Ajuste al input para que parezca "cerrado" en la parte inferior cuando el menú está visible */
+.input-select-wrapper .form-input.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+}
+/* Este apartado es para la Responsividad entre dispositivos */
+@media (min-width: 640px) {
+    
+    .features-grid,
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.25rem;
+    }
+
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1024px) {
+    
+    .hero-section {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .hero-content {
+        max-width: 50%; 
+    }
+
+    .hero-image {
+        width: 50%;
+        height: 400px;
+    }
+
+    .hero-title {
+        font-size: 3.75rem;
+    }
+
+    .features-grid,
+    .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

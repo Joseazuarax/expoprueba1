@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MathMaster - Domina las Matemáticas a tu Manera</title>
+    <link rel="stylesheet" href="static/css/styles.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+</head>
+<body>
+
+    <div class="page-container">
+        <div class="content-wrapper">
+
+            {% include 'componentes/headerP.html' %}
+            <main>
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            Domina las Matemáticas, a tu <span style="color: #BC945A;" class="highlight-color">Manera</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Desbloquea tu potencial con nuestros cursos interactivos, guiados por tutores expertos y ejemplos prácticos del mundo real.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="/session" class="btn btn-primary btn-large">Comienza Gratis</a>
+                        </div>  
+                    </div>
+                    <div class="hero-image">
+                        </div>
+                </section>
+                <section class="features-section">
+                    <div class="section-header">
+                        <h2 class="section-title">¿Por Qué Elegirnos?</h2>
+                        <p class="section-description">
+                            Nuestra plataforma está diseñada para hacer que el aprendizaje de las matemáticas sea intuitivo, atractivo y eficaz. Descubre las ventajas de aprender con nosotros.
+                        </p>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <span class="material-symbols-outlined icon-large">school</span>
+                            <h3>Instructores Expertos</h3>
+                            <p>Aprende de los mejores. Nuestros instructores son académicos y profesionales experimentados apasionados por la enseñanza.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="material-symbols-outlined icon-large">schedule</span>
+                            <h3>Aprendizaje Flexible</h3>
+                            <p>Estudia a tu propio ritmo, en cualquier dispositivo. Nuestra plataforma está disponible 24/7 para adaptarse a tu horario.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="material-symbols-outlined icon-large">lightbulb</span>
+                            <h3>Proyectos Prácticos</h3>
+                            <p>Aplica tus conocimientos con proyectos prácticos que resuelven problemas del mundo real y construyen tu portafolio.</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="testimonials-section">
+                    <h2 class="section-title">Opiniones de Nuestros Estudiantes</h2>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar" style="background-image: url('https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=SJ');"></div>
+                                <div>
+                                    <p class="name">Sarah Johnson</p>
+                                    <p class="title">Estudiante de Ingeniería</p>
+                                </div>
+                            </div>
+                            <p class="quote">
+                                "El curso de cálculo fue un punto de inflexión para mis exámenes universitarios. ¡Las explicaciones fueron tan claras!"
+                            </p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar" style="background-image: url('https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=DC');"></div>
+                                <div>
+                                    <p class="name">David Chen</p>
+                                    <p class="title">Estudiante de Secundaria</p>
+                                </div>
+                            </div>
+                            <p class="quote">"Finalmente entiendo el álgebra. Los ejercicios interactivos marcaron toda la diferencia."</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar" style="background-image: url('https://placehold.co/100x100/A0A0A0/FFFFFF/png?text=ER');"></div>
+                                <div>
+                                    <p class="name">Emily Rodriguez</p>
+                                    <p class="title">Profesional</p>
+                                </div>
+                            </div>
+                            <p class="quote">"Una plataforma fantástica para cualquiera que busque fortalecer sus habilidades matemáticas. ¡Muy recomendable!"</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="cta-section">
+                    <div class="cta-box">
+                        <h2 class="section-title">¿Listo para Empezar tu Viaje Matemático?</h2>
+                        <p class="section-description">Únete a miles de estudiantes y transforma tu comprensión de las matemáticas hoy mismo. Regístrate gratis y obtén acceso a nuestra lección de introducción.</p>
+                        <a href="/register" class="btn btn-primary btn-large">Regístrate Ahora</a>
+                    </div>
+                </section>
+                </main>
+{% include 'componentes/footer.html' %}

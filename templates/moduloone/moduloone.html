@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Módulo 1: Ecuaciones - Plataforma de Matemáticas</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#753232",
+              "secondary": "#9E5E5E", 
+              "accent-gold": "#C9B037",
+              "light-gray": "#f7f9fa",
+              "text-primary": "#1f2937",
+              "success": "#10b981",
+              "error": "#ef4444"
+            },
+            fontFamily: {
+              "display": ["Lexend", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        .hidden-section { display: none; }
+        .active-section { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Estilos para Feedback */
+        .feedback-box { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="font-display bg-white text-text-primary h-screen flex flex-col overflow-hidden">
+
+    <header class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white z-50 shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                <span class="material-symbols-outlined">calculate</span>
+            </div>
+            <h1 class="font-bold text-lg tracking-tight">Plataforma de Matemáticas</h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden md:flex text-sm font-medium gap-4 text-gray-500">
+                <span class="text-primary bg-primary/5 px-3 py-1 rounded-full">Módulo 1: Ecuaciones</span>
+                <span>Progreso Global: <span id="global-progress">0%</span></span>
+            </div>
+            <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">U</div>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <aside class="w-64 bg-light-gray border-r border-gray-200 flex-col hidden md:flex overflow-y-auto">
+            <div class="p-6">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Temario</h3>
+                <nav class="space-y-2">
+                    <button onclick="switchLesson('1.1')" id="btn-1.1" class="nav-btn w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors bg-white shadow-sm text-primary border-l-4 border-primary">
+                        1.1 Introducción
+                    </button>
+                    <button onclick="switchLesson('1.2')" id="btn-1.2" class="nav-btn w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-white hover:shadow-sm transition-colors border-l-4 border-transparent">
+                        1.2 Ec. Lineales
+                    </button>
+                    <button onclick="switchLesson('1.3')" id="btn-1.3" class="nav-btn w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-white hover:shadow-sm transition-colors border-l-4 border-transparent">
+                        1.3 Ec. Cuadráticas
+                    </button>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12 scroll-smooth" id="main-content">
+            
+            <div id="lesson-1.1" class="lesson-container active-section max-w-3xl mx-auto">
+                <div class="mb-8">
+                    <span class="text-accent-gold font-bold text-sm">Lección 1.1</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-primary mt-1 mb-4">Introducción a las Ecuaciones</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Una ecuación es una <strong>igualdad matemática</strong> entre dos expresiones, denominadas miembros, en las que aparecen elementos conocidos y datos desconocidos (incógnitas).
+                    </p>
+                </div>
+
+                <form id="form-1.1" action="/api/submit_lesson" method="POST" onsubmit="event.preventDefault(); validateIntro();">
+                    <input type="hidden" name="student_id" value="101"> <input type="hidden" name="lesson_id" value="1.1">
+                    
+                    <section class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-8">
+                        <h3 class="font-bold text-lg mb-4">Conceptos Básicos</h3>
+                        <div class="grid gap-6">
+                            <div class="bg-light-gray p-4 rounded-lg">
+                                <p class="font-mono text-xl text-center">x + 5 = 15</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">¿Cuál es la incógnita en la ecuación de arriba?</label>
+                                <div class="flex gap-4">
+                                    <label class="flex items-center gap-2 p-3 border rounded cursor-pointer hover:bg-gray-50 w-full">
+                                        <input type="radio" name="q1_variable" value="5" class="text-primary focus:ring-primary">
+                                        <span>5</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border rounded cursor-pointer hover:bg-gray-50 w-full">
+                                        <input type="radio" name="q1_variable" value="x" class="text-primary focus:ring-primary">
+                                        <span>x</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border rounded cursor-pointer hover:bg-gray-50 w-full">
+                                        <input type="radio" name="q1_variable" value="15" class="text-primary focus:ring-primary">
+                                        <span>15</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="feedback-1.1" class="hidden mt-4 p-4 rounded-lg text-sm font-medium"></div>
+                    </section>
+
+                    <button type="submit" class="w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-secondary transition-transform hover:scale-[1.01]">
+                        Validar y Continuar
+                    </button>
+                </form>
+            </div>
+
+            <div id="lesson-1.2" class="lesson-container hidden-section max-w-3xl mx-auto">
+                <div class="mb-8">
+                    <span class="text-accent-gold font-bold text-sm">Lección 1.2</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-primary mt-1 mb-4">Ecuaciones Lineales</h2>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Son ecuaciones de primer grado donde la incógnita está elevada a la potencia 1. Tienen la forma general: <br>
+                        <span class="font-mono bg-yellow-100 px-2 rounded">ax + b = 0</span>
+                    </p>
+                </div>
+
+                <form id="form-1.2" action="/api/submit_lesson" method="POST" onsubmit="event.preventDefault(); validateLinear();">
+                    <input type="hidden" name="student_id" value="101">
+                    <input type="hidden" name="lesson_id" value="1.2">
+
+                    <section class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-8">
+                        <h3 class="font-bold text-lg mb-4">Despeja la X</h3>
+                        <p class="mb-4 text-gray-600">Resuelve la siguiente ecuación: <strong class="text-primary">2x - 8 = 0</strong></p>
+                        
+                        <div class="flex flex-col gap-2 max-w-xs">
+                            <label for="q_linear_result" class="text-sm font-medium">Valor de x:</label>
+                            <input type="number" 
+                                   id="q_linear_result" 
+                                   name="answer_x" 
+                                   class="rounded-lg border-gray-300 focus:border-primary focus:ring-primary" 
+                                   placeholder="Introduce tu respuesta">
+                        </div>
+                        <div id="feedback-1.2" class="hidden mt-4 p-4 rounded-lg text-sm font-medium"></div>
+                    </section>
+
+                    <button type="submit" class="w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-secondary transition-transform hover:scale-[1.01]">
+                        Comprobar Respuesta
+                    </button>
+                </form>
+            </div>
+
+            <div id="lesson-1.3" class="lesson-container hidden-section max-w-3xl mx-auto">
+                <div class="mb-8">
+                    <span class="text-accent-gold font-bold text-sm">Lección 1.3</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-primary mt-1 mb-4">Ecuaciones de Segundo Grado</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Exploraremos la forma <span class="font-mono font-bold text-primary">ax² + bx + c = 0</span> y la fórmula general.
+                    </p>
+                </div>
+
+                <section class="bg-light-gray p-6 rounded-xl border border-gray-200 mb-8">
+                    <h3 class="text-xl font-bold text-text-primary mb-2">La Fórmula General</h3>
+                    <div class="bg-white rounded-lg p-4 text-center my-4 border border-gray-200 shadow-inner overflow-x-auto">
+                         <p class="text-xl font-mono text-text-primary whitespace-nowrap">
+                            x = <span class="inline-block border-t border-black px-1 mx-1 align-middle text-center">
+                                -b ± √(b² - 4ac)<br>
+                                <span class="block pt-1 text-sm border-t-0">2a</span>
+                            </span>
+                        </p>
+                    </div>
+                </section>
+
+                <form id="form-1.3" action="/api/submit_lesson" method="POST" onsubmit="event.preventDefault(); validateQuadratic();">
+                    <input type="hidden" name="student_id" value="101">
+                    <input type="hidden" name="lesson_id" value="1.3">
+
+                    <section class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-8 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-accent-gold"></div>
+                        <h3 class="text-xl font-bold text-text-primary mb-2">¡Ahora es tu turno!</h3>
+                        <p class="text-gray-600 mb-6">Identifica los coeficientes en: <strong class="text-2xl align-middle mx-2 text-primary">3x² - 5x + 2 = 0</strong></p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-bold text-gray-500" for="coeff_a">a =</label>
+                                <input required class="w-full rounded-lg border-gray-300 bg-light-gray p-3 focus:border-primary focus:ring-primary" 
+                                       id="coeff_a" name="q_coeff_a" type="number" placeholder="Ej: 1">
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-bold text-gray-500" for="coeff_b">b =</label>
+                                <input required class="w-full rounded-lg border-gray-300 bg-light-gray p-3 focus:border-primary focus:ring-primary" 
+                                       id="coeff_b" name="q_coeff_b" type="number" placeholder="Ej: -2">
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-bold text-gray-500" for="coeff_c">c =</label>
+                                <input required class="w-full rounded-lg border-gray-300 bg-light-gray p-3 focus:border-primary focus:ring-primary" 
+                                       id="coeff_c" name="q_coeff_c" type="number" placeholder="Ej: 5">
+                            </div>
+                        </div>
+
+                        <div id="feedback-1.3" class="hidden mt-6 flex items-center gap-3 p-4 rounded-lg">
+                            <span class="material-symbols-outlined icon"></span>
+                            <p class="text-sm font-medium message"></p>
+                        </div>
+                    </section>
+
+                    <section class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-8">
+                         <h3 class="text-lg font-bold mb-4">Desafío Final: Selección Múltiple</h3>
+                         <p class="mb-4 text-sm text-gray-500">¿Cuál NO es una ecuación cuadrática?</p>
+                         <div class="space-y-3">
+                            <label class="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="final_challenge" value="A" class="h-5 w-5 text-primary focus:ring-primary">
+                                <span class="font-mono">x² + 2x = 0</span>
+                            </label>
+                            <label class="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="final_challenge" value="B" class="h-5 w-5 text-primary focus:ring-primary">
+                                <span class="font-mono">2x - 5 = 10</span>
+                            </label>
+                            <label class="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="final_challenge" value="C" class="h-5 w-5 text-primary focus:ring-primary">
+                                <span class="font-mono">3x² - 9 = 0</span>
+                            </label>
+                         </div>
+                    </section>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button type="submit" class="flex-1 flex items-center justify-center gap-2 rounded-xl bg-primary h-14 px-8 text-white text-lg font-bold shadow-lg shadow-primary/30 transition-transform hover:scale-[1.02]">
+                            Terminar Módulo
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // --- NAVEGACIÓN ---
+        function switchLesson(lessonId) {
+            // 1. Ocultar todas las secciones
+            document.querySelectorAll('.lesson-container').forEach(el => {
+                el.classList.add('hidden-section');
+                el.classList.remove('active-section');
+            });
+            
+            // 2. Mostrar la seleccionada
+            const target = document.getElementById('lesson-' + lessonId);
+            if(target) {
+                target.classList.remove('hidden-section');
+                target.classList.add('active-section');
+            }
+
+            // 3. Actualizar estilos del sidebar (clases activas)
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm', 'text-primary', 'border-primary');
+                btn.classList.add('text-gray-600', 'border-transparent');
+            });
+            const activeBtn = document.getElementById('btn-' + lessonId);
+            activeBtn.classList.remove('text-gray-600', 'border-transparent');
+            activeBtn.classList.add('bg-white', 'shadow-sm', 'text-primary', 'border-primary');
+        }
+
+        // --- VALIDACIÓN LECCIÓN 1.1 ---
+        function validateIntro() {
+            const formData = new FormData(document.getElementById('form-1.1'));
+            const answer = formData.get('q1_variable');
+            const feedback = document.getElementById('feedback-1.1');
+            
+            feedback.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-green-50', 'text-green-700');
+
+            if (answer === 'x') {
+                feedback.classList.add('bg-green-50', 'text-green-700', 'border', 'border-green-200');
+                feedback.innerHTML = " ¡Correcto! 'x' es la incógnita que debemos encontrar.";
+                // Simulación de avance automático
+                setTimeout(() => switchLesson('1.2'), 1500);
+            } else {
+                feedback.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200');
+                feedback.innerHTML = " Incorrecto. Recuerda que los números (5, 15) son constantes.";
+            }
+        }
+
+        // --- VALIDACIÓN LECCIÓN 1.2 ---
+        function validateLinear() {
+            const inputVal = document.getElementById('q_linear_result').value;
+            const feedback = document.getElementById('feedback-1.2');
+            
+            feedback.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-green-50', 'text-green-700');
+
+            // Ecuación: 2x - 8 = 0  ->  2x = 8  ->  x = 4
+            if (parseInt(inputVal) === 4) {
+                feedback.classList.add('bg-green-50', 'text-green-700', 'border', 'border-green-200');
+                feedback.innerHTML = " ¡Excelente! 2(4) - 8 es igual a 0.";
+                setTimeout(() => switchLesson('1.3'), 1500);
+            } else {
+                feedback.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200');
+                feedback.innerHTML = " Inténtalo de nuevo. Suma 8 a ambos lados y luego divide por 2.";
+            }
+        }
+
+        // --- VALIDACIÓN LECCIÓN 1.3 (Compleja) ---
+        function validateQuadratic() {
+            // Obtener valores
+            const a = document.getElementById('coeff_a').value;
+            const b = document.getElementById('coeff_b').value;
+            const c = document.getElementById('coeff_c').value;
+            
+            // Obtener Radio button
+            const challenge = document.querySelector('input[name="final_challenge"]:checked');
+
+            const feedback = document.getElementById('feedback-1.3');
+            const icon = feedback.querySelector('.icon');
+            const msg = feedback.querySelector('.message');
+
+            feedback.classList.remove('hidden', 'bg-green-50', 'border-green-200', 'text-green-700', 'bg-red-50', 'border-red-200', 'text-red-700');
+
+            // Validación Lógica: Ecuación 3x² - 5x + 2 = 0
+            // a=3, b=-5, c=2
+            let isCoeffCorrect = (a == 3 && b == -5 && c == 2);
+            
+            if (isCoeffCorrect) {
+                // Si coeficientes están bien, revisamos el desafío final (La lineal es B: 2x - 5 = 10)
+                if (challenge && challenge.value === 'B') {
+                    feedback.classList.add('bg-green-50', 'border-green-200', 'text-green-700');
+                    icon.textContent = "workspace_premium";
+                    msg.textContent = "¡Felicidades! Has completado el Módulo 1 perfectamente. Datos listos para enviar.";
+                    
+                    // Aquí harías el submit real al backend
+                    // document.getElementById('form-1.3').submit(); 
+                    confettiEffect(); // Función imaginaria para celebrar
+                } else if (!challenge) {
+                    feedback.classList.add('bg-yellow-50', 'border-yellow-200', 'text-yellow-700');
+                    icon.textContent = "warning";
+                    msg.textContent = "Los coeficientes están bien, pero te falta responder el Desafío Final abajo.";
+                } else {
+                    feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-700');
+                    icon.textContent = "error";
+                    msg.textContent = "Los coeficientes son correctos, pero el Desafío Final está mal. ¿Cuál de esas NO tiene x²?";
+                }
+            } else {
+                feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-700');
+                icon.textContent = "cancel";
+                msg.textContent = "Revisa los coeficientes. Recuerda el signo negativo en -5x.";
+            }
+        }
+
+        function confettiEffect() {
+            // Placeholder para efectos visuales
+            alert("¡MÓDULO COMPLETADO CON ÉXITO! \nDatos simulados enviados al servidor.");
+        }
+    </script>
+</body>
+</html>

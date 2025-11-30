@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Registro - Plataforma</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="{{ url_for('static', filename='js/funtions.js') }}"></script>
+    <style>
+        :root {
+            --font-family-display: 'Lexend', sans-serif;
+        }
+        .action-button {
+            font-family: var(--font-family-display) !important;
+        }
+    </style>
+</head>
+
+<body>
+{% include 'componentes/headerG.html' %}
+<div class="login-container">
+    <div class="login-wrapper" style="max-width: 35rem;">   
+
+        <div class="logo-section">
+            <div class="logo-icon-text">
+                <p class="logo-title"></p>
+            </div>
+            <p class="logo-subtitle"></p>
+        </div>
+
+        <div class="login-card" style="padding: 2rem 2.5rem;"> 
+            <form action="{{ url_for('register_submit') }}" method="post" class="login-form">
+                            <h1 class="card-title">Registro</h1>
+            <p class="card-subtitle">Ingresa tus datos para crear una nueva cuenta.</p>
+
+            <div class="form-fields">
+
+                <label for="usuario" class="form-label">
+                    <p class="label-text">Nombre Completo</p>
+                    <input class="form-input" type="text"id="frmUsuario" name="frmUsuario"  placeholder="Tu nombre">
+                </label>
+
+                <label  for="email" class="form-label">
+                    <p class="label-text">Correo Electrónico</p>
+                    <input class="form-input" type="email"  id="password" name="frmCuentaCorreo" placeholder="correo@email.com">
+                </label>
+
+                <label for="password" class="form-label">
+                    <p class="label-text">Contraseña</p>
+                    <div class="password-input-wrapper">
+                        <input class="form-input" type="password" id="password" name="frmContraseña" placeholder="Ingresa tu contraseña">
+                        <button type="button" class="toggle-password-button">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </label>
+
+                <label for="semestre" class="form-label">
+                    <p class="label-text">Semestre:</p>
+                    <div class="password-input-wrapper input-select-wrapper">
+                        <input  class="form-input" id="semestre-input" name="frmSemestre" type="text" placeholder="Selecciona o escribe el semestre" autocomplete="off" required>
+                        
+                        <div class="custom-options" id="semestre-options">
+                            <div class="option-item" data-value="1er Semestre">1er Semestre</div>
+                            <div class="option-item" data-value="2do Semestre">2do Semestre</div>
+                            <div class="option-item" data-value="3er Semestre">3er Semestre</div>
+                            <div class="option-item" data-value="4to Semestre">4to Semestre</div>
+                            <div class="option-item" data-value="5to Semestre">5to Semestre</div>
+                            <div class="option-item" data-value="6to Semestre">6to Semestre</div>
+                        </div>
+                    </div>
+                </label>
+
+                <div class="form-fields">
+    <label class="form-label" for="grupo-input">
+        <p class="label-text">Grupo:</p>
+        <div class="password-input-wrapper input-select-wrapper" id="grupo-wrapper">
+            <input class="form-input" id="grupo-input" name="frmGrupo" type="text" placeholder="Selecciona o escribe el grupo" autocomplete="off" required>
+            
+            <div class="custom-options" id="grupo-options">
+                <div class="option-item" data-value="A">A</div>
+                <div class="option-item" data-value="B">B</div>
+                <div class="option-item" data-value="C">C</div>
+                <div class="option-item" data-value="D">D</div>
+            </div>
+        </div>
+    </label>
+
+    <label class="form-label" for="turno-input">
+        <p class="label-text">Turno:</p>
+        <div class="password-input-wrapper input-select-wrapper" id="turno-wrapper">
+            <input class="form-input" id="turno-input" name="frmTurno" type="text" placeholder="Selecciona o escribe el turno" autocomplete="off" required>
+            
+            <div class="custom-options" id="turno-options">
+                <div class="option-item" data-value="Matutino">Matutino</div>
+                <div class="option-item" data-value="Vespertino">Vespertino</div>
+            </div>
+        </div>
+    </label>
+
+    <label class="form-label" for="especialidad-input">
+        <p class="label-text">Especialidad:</p>
+        <div class="password-input-wrapper input-select-wrapper" id="especialidad-wrapper">
+            <input class="form-input" id="especialidad-input" name="frmEspecialidad" type="text" placeholder="Selecciona o escribe la especialidad" autocomplete="off" required>
+            
+            <div class="custom-options" id="especialidad-options">
+                <div class="option-item" data-value="Tecnico en Programación">Tecnico en Programación</div>
+                <div class="option-item" data-value="Tecnico en Administración de Recursos Humanos">Tecnico en Administración de Recursos Humanos</div>
+                <div class="option-item" data-value="Tecnico en Logística">Tecnico en Logística</div>
+                <div class="option-item" data-value="Tecnico en Mantenimiento Industrial">Tecnico en Mantenimiento Industrial</div>
+                <div class="option-item" data-value="Tecnico en Ciberseguridad">Tecnico en Ciberseguridad</div>
+                <div class="option-item" data-value="Tecnico en Electrónica">Tecnico en Electrónica</div>
+                <div class="option-item" data-value="Tecnico en Laboratorista Clínico">Tecnico en Laboratorista Clínico</div>
+                <div class="option-item" data-value="Tecnico en Laboratorista Químico">Tecnico en Laboratorista Químico</div>
+            </div>
+        </div>
+    </label>
+</div>
+
+            </div>
+
+            <div class="action-button-container">
+                <button type="submit" class="action-button">Crear Cuenta</button>
+            </div>
+
+            <div class="support-links">
+                <p class="text-secondary">
+                    ¿Ya tienes una cuenta?
+                    <a href="/session" class="link-primary">Iniciar sesión</a>
+                </p>
+            </div>
+
+        </div>
+            </form>
+
+
+       </div>
+</div>
+{% include 'componentes/footer.html' %}
+</body>
+</html>

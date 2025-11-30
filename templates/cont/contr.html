@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Recuperar Contraseña</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="{{ url_for('static', filename='js/funtions.js') }}"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#753232",
+                        "accent-gold": "#C5A353",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#121212",
+                        "text-light": "#1f2937",
+                        "text-dark": "#e5e7eb",
+                        "text-secondary-light": "#6b7280",
+                        "text-secondary-dark": "#9ca3af",
+                        "border-light": "#d1d5db",
+                        "border-dark": "#4b5563"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    // Animación personalizada para la aparición del mensaje
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            /* Asegura que el icono se renderice correctamente */
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .footer {
+            border-top: 1px solid #E5E7EB;
+            padding: 2.5rem 0 1.5rem 0;
+            text-align: center;
+            padding-right: 1.5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-footer h3 {
+            font-size: 1.125rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem 1.5rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+        
+        .header {
+            margin-left: 2rem;
+            margin-right: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.05em;
+        }
+
+        .logo-icon img {
+            width: 6rem;
+            height: 2rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light text-text-light">
+  
+     {% include 'componentes/headerG.html' %}
+    <div class="flex min-h-screen w-full items-center justify-center bg-white p-4">
+
+        <main class="w-full max-w-md rounded-xl relative mb-11">
+
+            <div class="text-center mb-6">
+                <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300">
+                    <span id="header-icon" class="material-symbols-outlined !text-4xl">key</span>
+                </div>
+            </div>
+
+            <div id="form-state" class="transition-opacity duration-300">
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold tracking-tight text-text-light">
+                        Recuperar <span class="text-accent-gold">Contraseña</span>
+                    </h1>
+                    <p class="mt-3 text-text-secondary-light">
+                        Introduce tu correo electrónico para recibir un enlace y restablecer tu contraseña.
+                    </p>
+                </div>
+
+                <form id="recovery-form" class="mt-8 space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-text-light" for="email">
+                            Correo Electrónico
+                        </label>
+                        <div class="mt-2">
+                            <input id="email" name="email" type="email" autocomplete="email" required placeholder="tu.correo@ejemplo.com" class="form-input block h-12 w-full rounded-lg border-border-light bg-white px-4 py-2 text-text-light placeholder:text-text-secondary-light/70 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <button id="submit-btn" type="submit" class="flex h-12 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 text-base font-bold text-white shadow-sm transition-all hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                            <span id="btn-text">Enviar Enlace</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="success-state" class="hidden text-center animate-fade-in-up space-y-6 py-4">
+                <h1 class="text-3xl font-bold tracking-tight text-text-light">
+                    ¡Revisa tu <span class="text-accent-gold">Bandeja!</span>
+                </h1>
+                <p class="mt-3 text-text-secondary-light text-lg leading-relaxed">
+                    Se te ha enviado un correo electrónico con las instrucciones para restablecer tu contraseña.
+                </p>
+                 <p class="text-sm text-text-secondary-light/80">
+                    Si no lo encuentras, revisa la carpeta de spam.
+                </p>
+            </div>
+            <div class="mt-10 text-center border-t border-border-light/30 pt-6">
+                <a class="text-sm font-medium text-text-secondary-light transition-colors hover:text-primary flex items-center justify-center gap-2" href="/session">
+                    <span class="material-symbols-outlined !text-lg">arrow_back</span> Volver a Iniciar Sesión
+                </a>
+            </div>
+
+        </main>
+    </div>
+    {% include 'componentes/footer.html' %}
+</body>
+
+</html>

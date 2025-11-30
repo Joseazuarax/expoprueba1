@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Registro Exitoso</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#753232",       /* Granate del botón */
+                        "accent-gold": "#bfa15c",   /* Dorado del título (tomado de tu diseño) */
+                        "background-light": "#FFFFFF",
+                        "text-light": "#374151",
+                        "text-secondary": "#6b7280",
+                        "success-bg": "#dcfce7",    /* Fondo verde claro del icono */
+                        "success-icon": "#16a34a"   /* Color del check */
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="font-display bg-background-light text-text-light">
+
+    <div class="flex min-h-screen w-full items-center justify-center bg-white p-4">
+        
+        <main class="w-full max-w-md rounded-xl text-center">
+            
+            <div class="flex flex-col items-center mb-8">
+                <div class="flex items-center justify-center h-24 w-24 bg-success-bg rounded-full mb-6">
+                    <svg class="w-12 h-12 text-success-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+
+                <h1 class="text-4xl font-bold tracking-tight text-accent-gold">
+                    ¡Cuenta Creada Exitosamente!
+                </h1>
+                <p class="mt-4 text-lg text-text-secondary">
+                    Te damos la bienvenida. Tu viaje para dominar las matemáticas ha comenzado.
+                </p>
+            </div>
+
+            <div class="mt-8">
+                <a href="/session" class="flex h-12 w-full items-center justify-center rounded-lg bg-primary px-6 py-2 text-base font-bold text-white shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                    Iniciar Sesión
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
