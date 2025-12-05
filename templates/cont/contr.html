@@ -179,7 +179,9 @@
 
                     <div>
                         <button id="submit-btn" type="submit" class="flex h-12 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 text-base font-bold text-white shadow-sm transition-all hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed">
-                            <span id="btn-text">Enviar Enlace</span>
+                            <form action="/guardar" method="post">
+                                <span id="btn-text" onclick="this.closest('form').submit()">Enviar Enlace</span>
+                            </form>
                         </button>
                     </div>
                 </form>

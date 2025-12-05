@@ -48,7 +48,7 @@
         <div class="flex items-center gap-4">
             <div class="hidden md:flex text-sm font-medium gap-4 text-gray-500">
                 <span class="text-primary bg-primary/5 px-3 py-1 rounded-full">Módulo 1: Ecuaciones</span>
-                <span>Progreso Global: <span id="global-progress">0%</span></span>
+                <span>Progreso Global: <span id="global-progress">{%progreso%}</span></span>
             </div>
             <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">U</div>
         </div>
@@ -176,7 +176,7 @@
                     </div>
                 </section>
 
-                <form id="form-1.3" action="/api/submit_lesson" method="POST" onsubmit="event.preventDefault(); validateQuadratic();">
+                <form id="form-1.3" action="/submit_lesson" method="POST" onsubmit="event.preventDefault(); validateQuadratic();">
                     <input type="hidden" name="student_id" value="101">
                     <input type="hidden" name="lesson_id" value="1.3">
 
@@ -304,49 +304,65 @@
 
         // --- VALIDACIÓN LECCIÓN 1.3 (Compleja) ---
         function validateQuadratic() {
-            // Obtener valores
-            const a = document.getElementById('coeff_a').value;
-            const b = document.getElementById('coeff_b').value;
-            const c = document.getElementById('coeff_c').value;
+    const form = document.getElementById('form-1.3');
+
+    const a = document.getElementById('coeff_a').value;
+    const b = document.getElementById('coeff_b').value;
+    const c = document.getElementById('coeff_c').value;
+
+    const challenge = document.querySelector('input[name="final_challenge"]:checked');
+
+    const feedback = document.getElementById('feedback-1.3');
+    const icon = feedback.querySelector('.icon');
+    const msg = feedback.querySelector('.message');
+
+    feedback.classList.remove('hidden', 'bg-green-50', 'border-green-200', 'text-green-700', 'bg-red-50', 'border-red-200', 'text-red-700');
+
+    let isCoeffCorrect = (a == 3 && b == -5 && c == 2);
+
+    if (isCoeffCorrect) {
+        if (challenge && challenge.value === 'B') {
             
-            // Obtener Radio button
-            const challenge = document.querySelector('input[name="final_challenge"]:checked');
+            // --- 🎯 AGREGAMOS ESTE INPUT PARA ENVIAR TRUE ---
+            const hiddenSuccess = document.createElement("input");
+            hiddenSuccess.type = "hidden";
+            hiddenSuccess.name = "module_completed";
+            hiddenSuccess.value = "true";
+            form.appendChild(hiddenSuccess);
 
-            const feedback = document.getElementById('feedback-1.3');
-            const icon = feedback.querySelector('.icon');
-            const msg = feedback.querySelector('.message');
+            // Feedback visual
+            feedback.classList.add('bg-green-50', 'border-green-200', 'text-green-700');
+            icon.textContent = "workspace_premium";
+            msg.textContent = "¡Felicidades! Módulo completado. Enviando datos...";
 
-            feedback.classList.remove('hidden', 'bg-green-50', 'border-green-200', 'text-green-700', 'bg-red-50', 'border-red-200', 'text-red-700');
+            // --- 🎉 AHORA SÍ ENVIAMOS EL FORMULARIO A FLASK ---
+            setTimeout(() => {
+                form.submit();
+            }, 600);
 
-            // Validación Lógica: Ecuación 3x² - 5x + 2 = 0
-            // a=3, b=-5, c=2
-            let isCoeffCorrect = (a == 3 && b == -5 && c == 2);
-            
-            if (isCoeffCorrect) {
-                // Si coeficientes están bien, revisamos el desafío final (La lineal es B: 2x - 5 = 10)
-                if (challenge && challenge.value === 'B') {
-                    feedback.classList.add('bg-green-50', 'border-green-200', 'text-green-700');
-                    icon.textContent = "workspace_premium";
-                    msg.textContent = "¡Felicidades! Has completado el Módulo 1 perfectamente. Datos listos para enviar.";
-                    
-                    // Aquí harías el submit real al backend
-                    // document.getElementById('form-1.3').submit(); 
-                    confettiEffect(); // Función imaginaria para celebrar
-                } else if (!challenge) {
-                    feedback.classList.add('bg-yellow-50', 'border-yellow-200', 'text-yellow-700');
-                    icon.textContent = "warning";
-                    msg.textContent = "Los coeficientes están bien, pero te falta responder el Desafío Final abajo.";
-                } else {
-                    feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-700');
-                    icon.textContent = "error";
-                    msg.textContent = "Los coeficientes son correctos, pero el Desafío Final está mal. ¿Cuál de esas NO tiene x²?";
-                }
-            } else {
-                feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-700');
-                icon.textContent = "cancel";
-                msg.textContent = "Revisa los coeficientes. Recuerda el signo negativo en -5x.";
-            }
+            return; // salir
         }
+
+        // Faltó contestar el desafío
+        if (!challenge) {
+            feedback.classList.add('bg-yellow-50', 'border-yellow-200', 'text-yellow-700');
+            icon.textContent = "warning";
+            msg.textContent = "Los coeficientes están bien, pero falta responder el Desafío Final.";
+            return;
+        }
+
+        // Desafío incorrecto
+        feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-700');
+        icon.textContent = "error";
+        msg.textContent = "Los coeficientes son correctos, pero el Desafío Final está mal.";
+        return;
+    }
+
+    // Coeficientes incorrectos
+    feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-700');
+    icon.textContent = "cancel";
+    msg.textContent = "Revisa los coeficientes. Recuerda el signo negativo en -5x.";
+}
 
         function confettiEffect() {
             // Placeholder para efectos visuales
